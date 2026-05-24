@@ -1,15 +1,28 @@
 import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Bell, ChevronDown, ChevronRight, ChevronUp, CreditCard, Lock, UserRound } from "lucide-react-native";
 import { Avatar } from "../components/Avatar";
+import { BackButton } from "../components/BackButton";
 import { currentUser } from "../data/mockData";
-import { styles } from "../styles/styles";
+import { colors, styles } from "../styles/styles";
 
-export function ProfileScreen({ groups }) {
+const profileRows = [
+  { icon: UserRound, label: "Account Settings" },
+  { icon: Bell, label: "Notification Preferences" },
+  { icon: CreditCard, label: "Payment Methods" },
+  { icon: Lock, label: "Privacy & Security" }
+];
+
+export function ProfileScreen({ groups, goBack }) {
   const [showGroups, setShowGroups] = useState(false);
 
   return (
     <ScrollView contentContainerStyle={styles.screenContent}>
+      <View style={styles.pageHeader}>
+        <BackButton onPress={goBack} />
+        <Text style={styles.title}>Settings</Text>
+        <View style={styles.headerSpacer} />
+      </View>
       <View style={styles.profileHeader}>
         <Avatar label={currentUser.avatar} />
         <Text style={styles.profileName}>Alex Johnson</Text>
@@ -18,7 +31,11 @@ export function ProfileScreen({ groups }) {
       <View style={styles.chartCard}>
         <Pressable onPress={() => setShowGroups((current) => !current)} style={styles.rowBetween}>
           <Text style={styles.sectionTitle}>Manage Roommates</Text>
-          <Ionicons name={showGroups ? "chevron-up" : "chevron-down"} size={20} color="#64748b" />
+          {showGroups ? (
+            <ChevronUp size={20} color={colors.muted} strokeWidth={2.3} />
+          ) : (
+            <ChevronDown size={20} color={colors.muted} strokeWidth={2.3} />
+          )}
         </Pressable>
         {showGroups ? (
           groups.map((group) => (
@@ -32,16 +49,11 @@ export function ProfileScreen({ groups }) {
         )}
       </View>
       <View style={styles.menuListCard}>
-        {[
-          ["person-outline", "Account Settings"],
-          ["notifications-outline", "Notification Preferences"],
-          ["card-outline", "Payment Methods"],
-          ["lock-closed-outline", "Privacy & Security"]
-        ].map(([icon, label]) => (
+        {profileRows.map(({ icon: Icon, label }) => (
           <View key={label} style={styles.menuRow}>
-            <Ionicons name={icon} size={24} color="#8bceff" />
+            <Icon size={24} color={colors.primarySoft} strokeWidth={2.2} />
             <Text style={styles.menuRowText}>{label}</Text>
-            <Ionicons name="chevron-forward" size={20} color="rgba(248,250,252,0.55)" />
+            <ChevronRight size={20} color="rgba(248,250,252,0.55)" strokeWidth={2.3} />
           </View>
         ))}
       </View>

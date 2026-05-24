@@ -27,6 +27,15 @@ export const baseStyles = {
     flexDirection: "row",
     justifyContent: "space-between"
   },
+  headerActions: {
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 10
+  },
+  headerSpacer: {
+    height: 46,
+    width: 46
+  },
   kicker: {
     color: colors.muted,
     fontSize: 12,

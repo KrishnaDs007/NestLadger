@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { styles } from "../styles/styles";
+import { ChevronRight, Plus } from "lucide-react-native";
+import { colors, styles } from "../styles/styles";
 import { getSpent, money } from "../utils/expenseUtils";
 import { Avatar } from "./Avatar";
 import { Stat } from "./Stat";
@@ -24,7 +24,7 @@ function InlineQuickAdd({ onSubmit }) {
     <View style={styles.inlineAdd}>
       <TextInput value={value} onChangeText={setValue} onSubmitEditing={submit} placeholder="Add todo to group" placeholderTextColor="#7c8594" style={styles.inlineInput} />
       <Pressable onPress={submit} style={styles.inlineButton}>
-        <Ionicons name="add" size={18} color="#ffffff" />
+        <Plus size={18} color={colors.text} strokeWidth={2.5} />
       </Pressable>
     </View>
   );
@@ -38,7 +38,7 @@ export function GroupCard({ group, onOpen, addTodo }) {
     <Pressable onPress={() => onOpen(group.id)} style={styles.groupCard}>
       <View style={styles.rowBetween}>
         <Text style={styles.groupTitle}>{group.name}</Text>
-        <Ionicons name="chevron-forward" size={20} color="#64748b" />
+        <ChevronRight size={20} color={colors.muted} strokeWidth={2.3} />
       </View>
       <View style={styles.avatarStack}>
         {avatars.map((member) => (

@@ -75,6 +75,21 @@ export const componentStyles = {
     justifyContent: "center",
     width: 44
   },
+  headerIconButton: {
+    alignItems: "center",
+    backgroundColor: "rgba(4,31,45,0.72)",
+    borderColor: "rgba(139,206,255,0.34)",
+    borderRadius: 23,
+    borderWidth: 1,
+    height: 46,
+    justifyContent: "center",
+    shadowColor: colors.primarySoft,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.2,
+    shadowRadius: 18,
+    elevation: 8,
+    width: 46
+  },
   smallAction: {
     alignItems: "center",
     backgroundColor: colors.primary,

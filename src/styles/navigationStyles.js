@@ -3,8 +3,8 @@ import { colors } from "./theme";
 export const navigationStyles = {
   bottomNav: {
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.12)",
-    borderColor: colors.glassBorder,
+    backgroundColor: "rgba(4,31,45,0.72)",
+    borderColor: "rgba(139,206,255,0.28)",
     borderRadius: 999,
     borderWidth: 1,
     bottom: 22,
@@ -12,14 +12,31 @@ export const navigationStyles = {
     height: 72,
     justifyContent: "space-around",
     left: 22,
+    overflow: "visible",
     paddingHorizontal: 10,
     position: "absolute",
-    right: 22
+    right: 22,
+    shadowColor: "#000000",
+    shadowOpacity: 0.28,
+    shadowRadius: 24
+  },
+  navHighlighter: {
+    backgroundColor: colors.primarySoft,
+    borderRadius: 999,
+    height: 48,
+    left: 10,
+    opacity: 0.95,
+    position: "absolute",
+    top: 11,
+    width: 48
   },
   navItem: {
     alignItems: "center",
     flex: 1,
-    gap: 4
+    gap: 4,
+    height: 54,
+    justifyContent: "center",
+    zIndex: 2
   },
   navLabel: {
     color: "transparent",

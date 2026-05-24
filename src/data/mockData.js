@@ -1,9 +1,8 @@
 export const tabs = [
-  { id: "home", label: "Home", icon: "home-outline" },
-  { id: "todos", label: "Todos", icon: "checkbox-outline" },
-  { id: "groups", label: "Groups", icon: "people-outline" },
-  { id: "expenses", label: "Spend", icon: "pie-chart-outline" },
-  { id: "profile", label: "Profile", icon: "person-outline" }
+  { id: "home", label: "Home" },
+  { id: "todos", label: "Tasks" },
+  { id: "expenses", label: "Expenses" },
+  { id: "groups", label: "Groups" }
 ];
 
 export const filters = ["7 days", "Yesterday", "Today", "This month", "Last month", "Year", "Custom"];

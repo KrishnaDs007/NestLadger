@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Modal, Pressable, SafeAreaView, Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { CreditCard, UserRound, UsersRound } from "lucide-react-native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { BottomNav } from "./src/components/BottomNav";
 import { initialGroups } from "./src/data/mockData";
@@ -10,7 +10,7 @@ import { GroupsScreen } from "./src/screens/GroupsScreen";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { ProfileScreen } from "./src/screens/ProfileScreen";
 import { TodosScreen } from "./src/screens/TodosScreen";
-import { styles } from "./src/styles/styles";
+import { colors, styles } from "./src/styles/styles";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -111,6 +111,14 @@ export default function App() {
     setActiveTab("groups");
   }
 
+  function openSettings() {
+    setActiveTab("profile");
+  }
+
+  function goHome() {
+    setActiveTab("home");
+  }
+
   if (!isLoggedIn) {
     return <AuthScreen mode={authMode} setMode={setAuthMode} onLogin={() => setIsLoggedIn(true)} />;
   }
@@ -120,14 +128,14 @@ export default function App() {
       <ExpoStatusBar style="dark" />
       <View style={styles.appShell}>
         {activeTab === "home" ? (
-          <HomeScreen groups={groups} setSelectedGroup={openGroup} addTodo={addTodo} />
+          <HomeScreen groups={groups} setSelectedGroup={openGroup} addTodo={addTodo} openSettings={openSettings} />
         ) : null}
-        {activeTab === "todos" ? <TodosScreen groups={groups} toggleTodo={toggleTodo} /> : null}
+        {activeTab === "todos" ? <TodosScreen groups={groups} toggleTodo={toggleTodo} openSettings={openSettings} goBack={goHome} /> : null}
         {activeTab === "groups" ? (
-          <GroupsScreen groups={groups} selectedGroup={selectedGroup} setSelectedGroup={setSelectedGroupId} createGroup={createGroup} addMember={addMember} removeMember={removeMember} />
+          <GroupsScreen groups={groups} selectedGroup={selectedGroup} setSelectedGroup={setSelectedGroupId} createGroup={createGroup} addMember={addMember} removeMember={removeMember} openSettings={openSettings} goBack={goHome} />
         ) : null}
-        {activeTab === "expenses" ? <ExpensesScreen group={selectedGroup} addExpense={addExpense} /> : null}
-        {activeTab === "profile" ? <ProfileScreen groups={groups} /> : null}
+        {activeTab === "expenses" ? <ExpensesScreen group={selectedGroup} addExpense={addExpense} openSettings={openSettings} goBack={goHome} /> : null}
+        {activeTab === "profile" ? <ProfileScreen groups={groups} goBack={goHome} /> : null}
 
         <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} openMenu={() => setIsMenuOpen(true)} />
 
@@ -135,16 +143,16 @@ export default function App() {
           <Pressable style={styles.menuBackdrop} onPress={() => setIsMenuOpen(false)}>
             <View style={styles.quickMenu}>
               <Pressable onPress={addExpense} style={styles.quickMenuItem}>
-                <Ionicons name="card-outline" size={22} color="#2563eb" />
+                <CreditCard size={22} color={colors.primarySoft} strokeWidth={2.3} />
                 <Text style={styles.quickMenuText}>Add spend</Text>
               </Pressable>
               <Pressable onPress={createGroup} style={styles.quickMenuItem}>
-                <Ionicons name="people-outline" size={22} color="#2563eb" />
+                <UsersRound size={22} color={colors.primarySoft} strokeWidth={2.3} />
                 <Text style={styles.quickMenuText}>Create group</Text>
               </Pressable>
               <Pressable onPress={() => { setActiveTab("profile"); setIsMenuOpen(false); }} style={styles.quickMenuItem}>
-                <Ionicons name="person-outline" size={22} color="#2563eb" />
-                <Text style={styles.quickMenuText}>Profile</Text>
+                <UserRound size={22} color={colors.primarySoft} strokeWidth={2.3} />
+                <Text style={styles.quickMenuText}>Settings</Text>
               </Pressable>
             </View>
           </Pressable>

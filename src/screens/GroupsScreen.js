@@ -1,26 +1,32 @@
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Mail, Pencil, Plus, Scale, UserMinus, UserPlus } from "lucide-react-native";
 import { Avatar } from "../components/Avatar";
-import { styles } from "../styles/styles";
+import { BackButton } from "../components/BackButton";
+import { SettingsButton } from "../components/SettingsButton";
+import { colors, styles } from "../styles/styles";
 
-export function GroupsScreen({ groups, selectedGroup, setSelectedGroup, createGroup, addMember, removeMember }) {
+export function GroupsScreen({ groups, selectedGroup, setSelectedGroup, createGroup, addMember, removeMember, openSettings, goBack }) {
   return (
     <ScrollView contentContainerStyle={styles.screenContent}>
-      <View style={styles.rowBetween}>
+      <View style={styles.pageHeader}>
+        <BackButton onPress={goBack} />
         <View>
           <Text style={styles.kicker}>Admin tools</Text>
           <Text style={styles.title}>Groups</Text>
         </View>
-        <Pressable onPress={createGroup} style={styles.squareButton}>
-          <Ionicons name="add" size={22} color="#ffffff" />
-        </Pressable>
+        <View style={styles.headerActions}>
+          <Pressable onPress={createGroup} style={styles.squareButton}>
+            <Plus size={22} color={colors.text} strokeWidth={2.5} />
+          </Pressable>
+          <SettingsButton onPress={openSettings} />
+        </View>
       </View>
       {groups.map((group) => (
         <Pressable key={group.id} onPress={() => setSelectedGroup(group.id)} style={[styles.groupCard, selectedGroup.id === group.id && styles.selectedCard]}>
           <View style={styles.rowBetween}>
             <Text style={styles.groupTitle}>{group.name}</Text>
             <Pressable style={styles.editButton}>
-              <Ionicons name="create-outline" size={18} color="#2563eb" />
+              <Pencil size={17} color={colors.primarySoft} strokeWidth={2.3} />
               <Text style={styles.editText}>Edit</Text>
             </Pressable>
           </View>
@@ -31,7 +37,7 @@ export function GroupsScreen({ groups, selectedGroup, setSelectedGroup, createGr
                 <Text style={styles.memberName}>{member.name}</Text>
                 {member.id !== "krishna" ? (
                   <Pressable onPress={() => removeMember(group.id, member.id)}>
-                    <Ionicons name="close-circle" size={18} color="#c2410c" />
+                    <UserMinus size={18} color={colors.rose} strokeWidth={2.3} />
                   </Pressable>
                 ) : null}
               </View>
@@ -39,15 +45,15 @@ export function GroupsScreen({ groups, selectedGroup, setSelectedGroup, createGr
           </View>
           <View style={styles.groupActions}>
             <Pressable onPress={() => addMember(group.id)} style={styles.secondaryButton}>
-              <Ionicons name="person-add-outline" size={17} color="#2563eb" />
+              <UserPlus size={17} color={colors.primarySoft} strokeWidth={2.3} />
               <Text style={styles.secondaryButtonText}>Add member</Text>
             </Pressable>
             <Pressable style={styles.secondaryButton}>
-              <Ionicons name="mail-outline" size={17} color="#2563eb" />
+              <Mail size={17} color={colors.primarySoft} strokeWidth={2.3} />
               <Text style={styles.secondaryButtonText}>Invite</Text>
             </Pressable>
             <Pressable style={styles.splitButton}>
-              <Ionicons name="git-compare-outline" size={17} color="#ffffff" />
+              <Scale size={17} color={colors.text} strokeWidth={2.3} />
               <Text style={styles.splitButtonText}>Split bills</Text>
             </Pressable>
           </View>

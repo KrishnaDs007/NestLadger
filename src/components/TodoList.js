@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Keyboard, Pressable, Text, TextInput, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { styles } from "../styles/styles";
+import { Check, Plus } from "lucide-react-native";
+import { colors, styles } from "../styles/styles";
 
 export function TodoList({ group, addTodo, toggleTodo }) {
   const [title, setTitle] = useState("");
@@ -27,13 +27,13 @@ export function TodoList({ group, addTodo, toggleTodo }) {
       <View style={styles.compactInputRow}>
         <TextInput value={title} onChangeText={setTitle} onSubmitEditing={submit} placeholder="Quick add item" placeholderTextColor="#7c8594" style={styles.compactInput} />
         <Pressable onPress={submit} style={styles.squareButton}>
-          <Ionicons name="add" size={22} color="#ffffff" />
+          <Plus size={22} color={colors.text} strokeWidth={2.5} />
         </Pressable>
       </View>
       {group.todos.map((todo) => (
         <Pressable key={todo.id} onPress={() => toggleTodo(group.id, todo.id)} style={styles.todoRow}>
           <View style={[styles.check, todo.completed && styles.checkDone]}>
-            {todo.completed ? <Ionicons name="checkmark" size={15} color="#ffffff" /> : null}
+            {todo.completed ? <Check size={15} color={colors.text} strokeWidth={3} /> : null}
           </View>
           <Text style={[styles.todoText, todo.completed && styles.todoDone]}>{todo.title}</Text>
         </Pressable>
