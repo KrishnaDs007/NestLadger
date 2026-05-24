@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "NestLedger",
+    "slug": "nestledger",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "bundleIdentifier": "com.krishnadevashish.nestledger",
+      "buildNumber": "1",
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
