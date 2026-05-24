@@ -1,36 +1,28 @@
-import { useState } from "react";
-import { Pressable, Text, TextInput, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { ChevronRight, Plus } from "lucide-react-native";
 import { colors, styles } from "../styles/styles";
 import { getSpent, money } from "../utils/expenseUtils";
 import { Avatar } from "./Avatar";
 import { Stat } from "./Stat";
 
-function InlineQuickAdd({ onSubmit }) {
-  const [value, setValue] = useState("");
-
-  function submit() {
-    const title = value.trim();
-
-    if (!title) {
-      return;
-    }
-
-    onSubmit(title);
-    setValue("");
-  }
-
+function InlineQuickAdd({ onPress }) {
   return (
-    <View style={styles.inlineAdd}>
-      <TextInput value={value} onChangeText={setValue} onSubmitEditing={submit} placeholder="Add todo to group" placeholderTextColor="#7c8594" style={styles.inlineInput} />
-      <Pressable onPress={submit} style={styles.inlineButton}>
+    <Pressable
+      onPress={(event) => {
+        event.stopPropagation?.();
+        onPress();
+      }}
+      style={styles.inlineAdd}
+    >
+      <Text style={styles.inlineInputText}>Add todo to this group</Text>
+      <View style={styles.inlineButton}>
         <Plus size={18} color={colors.text} strokeWidth={2.5} />
-      </Pressable>
-    </View>
+      </View>
+    </Pressable>
   );
 }
 
-export function GroupCard({ group, onOpen, addTodo }) {
+export function GroupCard({ group, onOpen, openTodoGroup }) {
   const spent = getSpent(group);
   const avatars = group.members.slice(0, 4);
 
@@ -50,7 +42,7 @@ export function GroupCard({ group, onOpen, addTodo }) {
         <Stat label="Target" value={money(group.target)} />
         <Stat label="Expense" value={money(spent)} />
       </View>
-      <InlineQuickAdd onSubmit={(title) => addTodo(group.id, title)} />
+      <InlineQuickAdd onPress={() => openTodoGroup(group.id)} />
     </Pressable>
   );
 }

@@ -18,6 +18,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("home");
   const [groups, setGroups] = useState(initialGroups);
   const [selectedGroupId, setSelectedGroupId] = useState("family");
+  const [focusedTodoGroupId, setFocusedTodoGroupId] = useState("family");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const selectedGroup = useMemo(
@@ -48,6 +49,13 @@ export default function App() {
       todos: group.todos.map((todo) =>
         todo.id === todoId ? { ...todo, completed: !todo.completed, updatedAt: now } : todo
       )
+    }));
+  }
+
+  function removeTodo(groupId, todoId) {
+    updateGroup(groupId, (group) => ({
+      ...group,
+      todos: group.todos.filter((todo) => todo.id !== todoId)
     }));
   }
 
@@ -111,6 +119,12 @@ export default function App() {
     setActiveTab("groups");
   }
 
+  function openTodoGroup(groupId) {
+    setSelectedGroupId(groupId);
+    setFocusedTodoGroupId(groupId);
+    setActiveTab("todos");
+  }
+
   function openSettings() {
     setActiveTab("profile");
   }
@@ -128,9 +142,9 @@ export default function App() {
       <ExpoStatusBar style="dark" />
       <View style={styles.appShell}>
         {activeTab === "home" ? (
-          <HomeScreen groups={groups} setSelectedGroup={openGroup} addTodo={addTodo} openSettings={openSettings} />
+          <HomeScreen groups={groups} setSelectedGroup={openGroup} openTodoGroup={openTodoGroup} openSettings={openSettings} />
         ) : null}
-        {activeTab === "todos" ? <TodosScreen groups={groups} toggleTodo={toggleTodo} openSettings={openSettings} goBack={goHome} /> : null}
+        {activeTab === "todos" ? <TodosScreen groups={groups} focusGroupId={focusedTodoGroupId} setFocusGroupId={setFocusedTodoGroupId} addTodo={addTodo} toggleTodo={toggleTodo} removeTodo={removeTodo} openSettings={openSettings} goBack={goHome} /> : null}
         {activeTab === "groups" ? (
           <GroupsScreen groups={groups} selectedGroup={selectedGroup} setSelectedGroup={setSelectedGroupId} createGroup={createGroup} addMember={addMember} removeMember={removeMember} openSettings={openSettings} goBack={goHome} />
         ) : null}
