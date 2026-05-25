@@ -16,6 +16,13 @@ export const componentStyles = {
     marginRight: -8,
     width: 34
   },
+  avatarLarge: {
+    borderRadius: 80,
+    borderWidth: 3,
+    height: 160,
+    boxShadow: `0 0 40px ${colors.primary}`,
+    width: 160
+  },
   avatarText: {
     color: colors.text,
     fontSize: 15,
@@ -23,6 +30,9 @@ export const componentStyles = {
   },
   avatarTextSmall: {
     fontSize: 11
+  },
+  avatarTextLarge: {
+    fontSize: 54
   },
   statLabel: {
     color: colors.muted,
@@ -83,10 +93,7 @@ export const componentStyles = {
     borderWidth: 1,
     height: 46,
     justifyContent: "center",
-    shadowColor: colors.primarySoft,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 18,
+    boxShadow: `0 8px 18px ${colors.primarySoft}`,
     elevation: 8,
     width: 46
   },

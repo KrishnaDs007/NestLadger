@@ -16,9 +16,11 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authMode, setAuthMode] = useState("signin");
   const [activeTab, setActiveTab] = useState("home");
+  const [tabHistory, setTabHistory] = useState([]);
   const [groups, setGroups] = useState(initialGroups);
   const [selectedGroupId, setSelectedGroupId] = useState("family");
   const [focusedTodoGroupId, setFocusedTodoGroupId] = useState("family");
+  const [defaultPaymentMethod, setDefaultPaymentMethod] = useState("UPI");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const selectedGroup = useMemo(
@@ -30,6 +32,29 @@ export default function App() {
     setGroups((currentGroups) =>
       currentGroups.map((group) => (group.id === groupId ? updater(group) : group))
     );
+  }
+
+  function navigate(nextTab) {
+    if (nextTab === activeTab) {
+      return;
+    }
+
+    setTabHistory((currentHistory) => [...currentHistory, activeTab]);
+    setActiveTab(nextTab);
+  }
+
+  function goBack() {
+    setTabHistory((currentHistory) => {
+      const previousTab = currentHistory[currentHistory.length - 1];
+
+      if (!previousTab) {
+        setActiveTab("home");
+        return [];
+      }
+
+      setActiveTab(previousTab);
+      return currentHistory.slice(0, -1);
+    });
   }
 
   function addTodo(groupId, title) {
@@ -70,12 +95,14 @@ export default function App() {
           amount: 999,
           day: "Today",
           date: "2026-05-24",
+          paymentMethod: defaultPaymentMethod,
+          currency: "Rs",
           settled: false
         },
         ...group.expenses
       ]
     }));
-    setActiveTab("expenses");
+    navigate("expenses");
     setIsMenuOpen(false);
   }
 
@@ -96,7 +123,7 @@ export default function App() {
       ...currentGroups
     ]);
     setSelectedGroupId(id);
-    setActiveTab("groups");
+    navigate("groups");
     setIsMenuOpen(false);
   }
 
@@ -114,23 +141,42 @@ export default function App() {
     }));
   }
 
+  function inviteMember(groupId, email) {
+    const name = email.split("@")[0] || "Invited friend";
+
+    updateGroup(groupId, (group) => ({
+      ...group,
+      members: [
+        ...group.members,
+        {
+          id: Date.now().toString(),
+          name,
+          avatar: name.slice(0, 2).toUpperCase()
+        }
+      ]
+    }));
+  }
+
   function openGroup(groupId) {
     setSelectedGroupId(groupId);
-    setActiveTab("groups");
+    navigate("groups");
   }
 
   function openTodoGroup(groupId) {
     setSelectedGroupId(groupId);
     setFocusedTodoGroupId(groupId);
-    setActiveTab("todos");
+    navigate("todos");
   }
 
   function openSettings() {
-    setActiveTab("profile");
+    navigate("profile");
   }
 
-  function goHome() {
+  function logout() {
+    setIsLoggedIn(false);
     setActiveTab("home");
+    setTabHistory([]);
+    setAuthMode("signin");
   }
 
   if (!isLoggedIn) {
@@ -144,14 +190,26 @@ export default function App() {
         {activeTab === "home" ? (
           <HomeScreen groups={groups} setSelectedGroup={openGroup} openTodoGroup={openTodoGroup} openSettings={openSettings} />
         ) : null}
-        {activeTab === "todos" ? <TodosScreen groups={groups} focusGroupId={focusedTodoGroupId} setFocusGroupId={setFocusedTodoGroupId} addTodo={addTodo} toggleTodo={toggleTodo} removeTodo={removeTodo} openSettings={openSettings} goBack={goHome} /> : null}
+        {activeTab === "todos" ? <TodosScreen groups={groups} focusGroupId={focusedTodoGroupId} setFocusGroupId={setFocusedTodoGroupId} addTodo={addTodo} toggleTodo={toggleTodo} removeTodo={removeTodo} openSettings={openSettings} goBack={goBack} /> : null}
         {activeTab === "groups" ? (
-          <GroupsScreen groups={groups} selectedGroup={selectedGroup} setSelectedGroup={setSelectedGroupId} createGroup={createGroup} addMember={addMember} removeMember={removeMember} openSettings={openSettings} goBack={goHome} />
+          <GroupsScreen groups={groups} selectedGroup={selectedGroup} setSelectedGroup={setSelectedGroupId} createGroup={createGroup} addMember={addMember} removeMember={removeMember} openSettings={openSettings} goBack={goBack} />
         ) : null}
-        {activeTab === "expenses" ? <ExpensesScreen group={selectedGroup} addExpense={addExpense} openSettings={openSettings} goBack={goHome} /> : null}
-        {activeTab === "profile" ? <ProfileScreen groups={groups} goBack={goHome} /> : null}
+        {activeTab === "expenses" ? <ExpensesScreen group={selectedGroup} addExpense={addExpense} openSettings={openSettings} goBack={goBack} /> : null}
+        {activeTab === "profile" ? (
+          <ProfileScreen
+            groups={groups}
+            defaultPaymentMethod={defaultPaymentMethod}
+            setDefaultPaymentMethod={setDefaultPaymentMethod}
+            goBack={goBack}
+            removeMember={removeMember}
+            inviteMember={inviteMember}
+            logout={logout}
+          />
+        ) : null}
 
-        <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} openMenu={() => setIsMenuOpen(true)} />
+        {activeTab !== "profile" ? (
+          <BottomNav activeTab={activeTab} setActiveTab={navigate} openMenu={() => setIsMenuOpen(true)} />
+        ) : null}
 
         <Modal transparent visible={isMenuOpen} animationType="fade" onRequestClose={() => setIsMenuOpen(false)}>
           <Pressable style={styles.menuBackdrop} onPress={() => setIsMenuOpen(false)}>
@@ -164,7 +222,7 @@ export default function App() {
                 <UsersRound size={22} color={colors.primarySoft} strokeWidth={2.3} />
                 <Text style={styles.quickMenuText}>Create group</Text>
               </Pressable>
-              <Pressable onPress={() => { setActiveTab("profile"); setIsMenuOpen(false); }} style={styles.quickMenuItem}>
+              <Pressable onPress={() => { navigate("profile"); setIsMenuOpen(false); }} style={styles.quickMenuItem}>
                 <UserRound size={22} color={colors.primarySoft} strokeWidth={2.3} />
                 <Text style={styles.quickMenuText}>Settings</Text>
               </Pressable>

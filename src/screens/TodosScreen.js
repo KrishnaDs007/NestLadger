@@ -64,8 +64,10 @@ export function TodosScreen({ groups, focusGroupId, setFocusGroupId, addTodo, to
     <ScrollView contentContainerStyle={styles.screenContent}>
       <View style={styles.pageHeader}>
         <BackButton onPress={goBack} />
-        <View>
+        <View style={styles.centeredHeaderTitleBlock}>
+          <Text style={styles.kicker}>Shared list</Text>
           <Text style={styles.title}>Todos</Text>
+          <View style={[styles.titleAccent, styles.titleAccentCentered]} />
         </View>
         <View style={styles.headerActions}>
           <View style={styles.todoCountBadge}>

@@ -9,9 +9,10 @@ export function HomeScreen({ groups, setSelectedGroup, openTodoGroup, openSettin
   return (
     <ScrollView contentContainerStyle={styles.screenContent}>
       <View style={styles.pageHeader}>
-        <View>
+        <View style={styles.headerTitleBlock}>
           <Text style={styles.kicker}>Good morning</Text>
           <Text style={styles.title}>NestLedger</Text>
+          <View style={styles.titleAccent} />
         </View>
         <SettingsButton onPress={openSettings} />
       </View>

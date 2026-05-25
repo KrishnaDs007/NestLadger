@@ -9,9 +9,7 @@ export const homeStyles = {
     marginBottom: 18,
     overflow: "hidden",
     padding: 22,
-    shadowColor: "#000000",
-    shadowOpacity: 0.18,
-    shadowRadius: 24
+    boxShadow: "0 0 24px rgba(0,0,0,0.18)"
   },
   homeSummaryCard: {
     backgroundColor: colors.glass,

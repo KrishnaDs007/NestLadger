@@ -10,9 +10,10 @@ export function GroupsScreen({ groups, selectedGroup, setSelectedGroup, createGr
     <ScrollView contentContainerStyle={styles.screenContent}>
       <View style={styles.pageHeader}>
         <BackButton onPress={goBack} />
-        <View>
+        <View style={styles.centeredHeaderTitleBlock}>
           <Text style={styles.kicker}>Admin tools</Text>
           <Text style={styles.title}>Groups</Text>
+          <View style={[styles.titleAccent, styles.titleAccentCentered]} />
         </View>
         <View style={styles.headerActions}>
           <Pressable onPress={createGroup} style={styles.squareButton}>

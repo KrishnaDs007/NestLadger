@@ -17,9 +17,9 @@ Then press:
 - `w` for web
 - or scan the QR code in the Expo Go app
 
-This project includes `.nvmrc` because Expo SDK 54 needs Node `20.19.x` or newer on a supported Node line. If your terminal says `nvm` is unavailable, run it with Node 20.19+ before starting Expo.
+This project includes `.nvmrc` because Expo SDK 56 needs a supported Node line. Use Node `20.19.4` or newer from a supported major version before starting Expo.
 
-This app is intentionally on Expo SDK 54 so it can open in the public Expo Go app on phones where SDK 55 support is not available yet.
+This app now targets Expo SDK 56. If Expo Go on your phone shows an incompatibility message, update Expo Go from the App Store or use a development/TestFlight build.
 
 ## Run Through TestFlight
 

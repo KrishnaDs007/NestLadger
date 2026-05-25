@@ -8,27 +8,25 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eas:login": "eas login",
-    "testflight": "eas build --platform ios --profile testflight --auto-submit",
-    "testflight:build": "eas build --platform ios --profile testflight",
-    "testflight:submit": "eas submit --platform ios --latest --profile testflight"
+    "eas:login": "npx eas login",
+    "testflight": "npx eas build --platform ios --profile testflight --auto-submit",
+    "testflight:build": "npx eas build --platform ios --profile testflight",
+    "testflight:submit": "npx eas submit --platform ios --latest --profile testflight"
   },
   "dependencies": {
-    "@expo/metro-runtime": "^6.1.2",
-    "@expo/vector-icons": "^15.1.1",
-    "expo": "^54.0.34",
-    "expo-asset": "~12.0.0",
-    "expo-status-bar": "~3.0.8",
+    "@expo/metro-runtime": "~56.0.12",
+    "expo": "^56.0.4",
+    "expo-asset": "^56.0.14",
+    "expo-status-bar": "~56.0.4",
     "lucide-react-native": "^1.16.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-native": "^0.81.4",
-    "react-native-svg": "^15.15.5",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-native": "^0.85.3",
+    "react-native-svg": "^15.15.4",
     "react-native-web": "^0.21.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "babel-preset-expo": "~54.0.0",
-    "eas-cli": "^19.0.8"
+    "babel-preset-expo": "~56.0.0"
   }
 }

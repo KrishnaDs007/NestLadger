@@ -20,7 +20,15 @@ export const baseStyles = {
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 24
+    marginBottom: 24,
+    minHeight: 58
+  },
+  headerTitleBlock: {
+    flex: 1
+  },
+  centeredHeaderTitleBlock: {
+    alignItems: "center",
+    flex: 1
   },
   rowBetween: {
     alignItems: "center",
@@ -37,21 +45,30 @@ export const baseStyles = {
     width: 46
   },
   kicker: {
-    color: colors.muted,
-    fontSize: 12,
+    color: colors.primarySoft,
+    fontSize: 11,
     fontWeight: "900",
-    letterSpacing: 1.2,
+    letterSpacing: 1.6,
     textTransform: "uppercase"
   },
   title: {
     color: colors.text,
-    fontSize: 36,
-    fontWeight: "900",
+    fontSize: 30,
+    fontWeight: "800",
     letterSpacing: 0,
-    marginTop: 4,
-    textShadowColor: "rgba(0,0,0,0.45)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 2
+    lineHeight: 36,
+    marginTop: 3
+  },
+  titleAccent: {
+    backgroundColor: colors.primary,
+    borderRadius: 999,
+    height: 3,
+    marginTop: 7,
+    opacity: 0.85,
+    width: 34
+  },
+  titleAccentCentered: {
+    alignSelf: "center"
   },
   sectionTitle: {
     color: colors.text,
@@ -59,9 +76,7 @@ export const baseStyles = {
     fontWeight: "900",
     letterSpacing: 0,
     marginBottom: 12,
-    textShadowColor: "rgba(0,0,0,0.35)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 2
+    textShadow: "0 2px 2px rgba(0,0,0,0.35)"
   },
   mutedText: {
     color: colors.muted,

@@ -18,11 +18,6 @@ export const profileStyles = {
     fontWeight: "700",
     marginTop: 6
   },
-  profileGroupRow: {
-    borderTopColor: "rgba(255,255,255,0.12)",
-    borderTopWidth: 1,
-    paddingVertical: 14
-  },
   menuListCard: {
     backgroundColor: colors.glass,
     borderColor: colors.glassBorder,
@@ -43,7 +38,7 @@ export const profileStyles = {
   menuRowText: {
     color: colors.text,
     flex: 1,
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "800"
   },
   logoutButton: {
@@ -51,9 +46,9 @@ export const profileStyles = {
     borderColor: "rgba(244,63,94,0.32)",
     borderRadius: 24,
     borderWidth: 1,
-    minHeight: 64,
     justifyContent: "center",
-    marginTop: 22
+    marginTop: 22,
+    minHeight: 64
   },
   logoutText: {
     color: colors.rose,

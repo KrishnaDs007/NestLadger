@@ -16,9 +16,10 @@ export function ExpensesScreen({ group, addExpense, openSettings, goBack }) {
     <ScrollView contentContainerStyle={styles.screenContent}>
       <View style={styles.pageHeader}>
         <BackButton onPress={goBack} />
-        <View>
+        <View style={styles.centeredHeaderTitleBlock}>
           <Text style={styles.kicker}>Expense calculator</Text>
           <Text style={styles.title}>{group.name}</Text>
+          <View style={[styles.titleAccent, styles.titleAccentCentered]} />
         </View>
         <SettingsButton onPress={openSettings} />
       </View>
@@ -37,7 +38,7 @@ export function ExpensesScreen({ group, addExpense, openSettings, goBack }) {
           <View key={expense.id} style={styles.expenseRow}>
             <View>
               <Text style={styles.expenseTitle}>{expense.title}</Text>
-              <Text style={styles.expenseMeta}>{expense.category} . {expense.day}</Text>
+              <Text style={styles.expenseMeta}>{expense.category} . {expense.paymentMethod || "UPI"} . {expense.day}</Text>
             </View>
             <Text style={styles.expenseAmount}>{money(expense.amount)}</Text>
           </View>

@@ -6,7 +6,7 @@ This document captures the current state of the app and the recommended path to 
 
 NestLedger is a React Native + Expo prototype for managing family groups, shared todos/groceries, monthly budgets, expenses, unsettled spends, and user profile information.
 
-It currently runs on Expo SDK 54 so it can open in the public Expo Go app. SDK 55 was tested earlier, but it caused an Expo Go compatibility issue on mobile because the installed Expo Go app did not yet support that SDK runtime.
+It currently runs on Expo SDK 56. If Expo Go reports an SDK incompatibility, update Expo Go or use a development/TestFlight build.
 
 ## Current Features
 
@@ -515,21 +515,21 @@ Recommended tooling:
 
 ## Expo Go Compatibility Decision
 
-The app is currently kept on Expo SDK 54 because SDK 55 caused this mobile error:
+The app previously used Expo SDK 54 because SDK 55 caused this mobile error on the installed Expo Go app:
 
 ```text
 Project is incompatible with this version of Expo Go
 The project you requested requires a newer version of Expo Go.
 ```
 
-The practical fix was to target SDK 54 until the public Expo Go app on the device supports SDK 55.
+The project has since been upgraded to SDK 56. The practical fix now is to keep Expo Go updated or use a development/TestFlight build.
 
 Current key versions:
 
 ```text
-expo 54.x
-react-native 0.81.x
-react 19.1.x
+expo 56.x
+react-native 0.85.x
+react 19.2.x
 ```
 
 ## TestFlight Plan

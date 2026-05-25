@@ -125,9 +125,7 @@ export const authStyles = {
     justifyContent: "center",
     minHeight: 60,
     marginTop: 22,
-    shadowColor: colors.primary,
-    shadowOpacity: 0.38,
-    shadowRadius: 18
+    boxShadow: `0 0 18px ${colors.primary}`
   },
   primaryButtonText: {
     color: colors.text,

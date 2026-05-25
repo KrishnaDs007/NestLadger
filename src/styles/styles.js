@@ -8,6 +8,7 @@ import { groupStyles } from "./groupStyles";
 import { homeStyles } from "./homeStyles";
 import { navigationStyles } from "./navigationStyles";
 import { profileStyles } from "./profileStyles";
+import { settingsStyles } from "./settingsStyles";
 import { todoStyles } from "./todoStyles";
 import { colors } from "./theme";
 
@@ -23,5 +24,6 @@ export const styles = StyleSheet.create({
   ...expenseStyles,
   ...navigationStyles,
   ...homeStyles,
-  ...profileStyles
+  ...profileStyles,
+  ...settingsStyles
 });

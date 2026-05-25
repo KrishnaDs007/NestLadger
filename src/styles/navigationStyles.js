@@ -16,18 +16,17 @@ export const navigationStyles = {
     paddingHorizontal: 10,
     position: "absolute",
     right: 22,
-    shadowColor: "#000000",
-    shadowOpacity: 0.28,
-    shadowRadius: 24
+    boxShadow: "0 0 24px rgba(0,0,0,0.28)"
   },
   navHighlighter: {
     backgroundColor: colors.primarySoft,
     borderRadius: 999,
     height: 48,
-    left: 10,
+    left: 0,
     opacity: 0.95,
+    pointerEvents: "none",
     position: "absolute",
-    top: 11,
+    top: 12,
     width: 48
   },
   navItem: {
@@ -36,6 +35,7 @@ export const navigationStyles = {
     gap: 4,
     height: 54,
     justifyContent: "center",
+    paddingTop: 6,
     zIndex: 2
   },
   navLabel: {
@@ -55,9 +55,7 @@ export const navigationStyles = {
     height: 68,
     justifyContent: "center",
     marginBottom: 36,
-    shadowColor: colors.primary,
-    shadowOpacity: 0.5,
-    shadowRadius: 20,
+    boxShadow: `0 0 20px ${colors.primary}`,
     width: 68
   },
   menuBackdrop: {
@@ -67,7 +65,7 @@ export const navigationStyles = {
     padding: 22
   },
   quickMenu: {
-    backgroundColor: colors.glassStrong,
+    backgroundColor: "rgba(15,23,42,0.42)",
     borderColor: colors.glassBorder,
     borderRadius: 24,
     borderWidth: 1,

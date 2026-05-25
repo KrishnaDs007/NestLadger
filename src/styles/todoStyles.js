@@ -20,13 +20,6 @@ export const todoStyles = {
     paddingHorizontal: 10,
     paddingTop: 11
   },
-  inlineInput: {
-    color: colors.text,
-    flex: 1,
-    fontSize: 14,
-    minHeight: 40,
-    paddingHorizontal: 10
-  },
   inlineButton: {
     alignItems: "center",
     backgroundColor: colors.primary,
@@ -68,28 +61,6 @@ export const todoStyles = {
     height: 42,
     justifyContent: "center",
     width: 42
-  },
-  compactInputRow: {
-    alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.06)",
-    borderRadius: 16,
-    flexDirection: "row",
-    gap: 8,
-    marginTop: 12,
-    padding: 7
-  },
-  compactInput: {
-    color: colors.text,
-    flex: 1,
-    fontSize: 15,
-    minHeight: 38,
-    paddingHorizontal: 8
-  },
-  todoRow: {
-    alignItems: "center",
-    flexDirection: "row",
-    gap: 10,
-    minHeight: 48
   },
   check: {
     alignItems: "center",
